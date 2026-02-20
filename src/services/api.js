@@ -46,6 +46,7 @@ export const authAPI = {
   updateProfile: (userData) => apiClient.put("/auth/profile", userData),
   updatePassword: (passwordData) => apiClient.put("/auth/password", passwordData),
   userList: () => apiClient.get("/auth/users"),
+  updateFcmToken: (fcmToken) => apiClient.put("/auth/fcm-token", { fcmToken }),
 };
 
 // PETS ENDPOINTS

@@ -5,7 +5,6 @@ import { login, clearError } from '../features/auth/authSlice';
 import { toast } from 'react-toastify';
 import Loader from '../components/Loader';
 import '../styles.css';
-
 const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
@@ -16,6 +15,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loading, error, isAuthenticated, user } = useSelector((state) => state.auth);
+
 
   useEffect(() => {
     if (isAuthenticated && user) {
@@ -70,7 +70,6 @@ const Login = () => {
       setErrors(newErrors);
       return;
     }
-
     dispatch(login(formData));
   };
 

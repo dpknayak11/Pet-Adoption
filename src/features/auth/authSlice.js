@@ -1,53 +1,74 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { authAPI } from '../../services/api';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { authAPI } from "../../services/api";
+import { requestForToken } from "./../../firebase";
 
 // Async Thunks
-export const login = createAsyncThunk('auth/login', async ({ email, password }, { rejectWithValue }) => {
-  try {
-    const response = await authAPI.login(email, password);
+export const login = createAsyncThunk(
+  "auth/login",
+  async ({ email, password }, { rejectWithValue }) => {
+    try {
+      const response = await authAPI.login(email, password);
 
-    const { token, user } = response.data.data;
-    localStorage.setItem('authToken', token);
-    localStorage.setItem('user', JSON.stringify(user));
-    return { token, user };
-  } catch (error) {
-    return rejectWithValue(error.response?.data?.message || 'Login failed');
-  }
-});
+      const { token, user } = response.data.data;
+      localStorage.setItem("authToken", token);
+      localStorage.setItem("user", JSON.stringify(user));
+      // 🔹 Generate FCM token
+      if (user.role === "USER") {
+        const fcmToken = await requestForToken();
+        if (fcmToken) await authAPI.updateFcmToken(fcmToken);
+      }
+      return { token, user };
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || "Login failed");
+    }
+  },
+);
 
-export const register = createAsyncThunk('auth/register', async (userData, { rejectWithValue }) => {
-  try {
-    const response = await authAPI.register(userData);
-    const { token, user } = response.data.data;
-    localStorage.setItem('authToken', token);
-    localStorage.setItem('user', JSON.stringify(user));
-    return { token, user };
-  } catch (error) {
-    return rejectWithValue(error.response?.data?.message || 'Registration failed');
-  }
-});
+export const register = createAsyncThunk(
+  "auth/register",
+  async (userData, { rejectWithValue }) => {
+    try {
+      const response = await authAPI.register(userData);
+      const { token, user } = response.data.data;
+      localStorage.setItem("authToken", token);
+      localStorage.setItem("user", JSON.stringify(user));
+      return { token, user };
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || "Registration failed",
+      );
+    }
+  },
+);
 
-export const getProfile = createAsyncThunk('auth/getProfile', async (_, { rejectWithValue }) => {
-  try {
-    const response = await authAPI.getProfile();
-    return response.data.user;
-  } catch (error) {
-    return rejectWithValue(error.response?.data?.message || 'Failed to fetch profile');
-  }
-});
+export const getProfile = createAsyncThunk(
+  "auth/getProfile",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await authAPI.getProfile();
+      return response.data.user;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to fetch profile",
+      );
+    }
+  },
+);
 
 // Initial State
 const initialState = {
-  user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null,
-  token: localStorage.getItem('authToken') || null,
+  user: localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user"))
+    : null,
+  token: localStorage.getItem("authToken") || null,
   loading: false,
   error: null,
-  isAuthenticated: !!localStorage.getItem('authToken'),
+  isAuthenticated: !!localStorage.getItem("authToken"),
 };
 
 // Slice
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
     logout: (state) => {
@@ -55,8 +76,8 @@ const authSlice = createSlice({
       state.token = null;
       state.isAuthenticated = false;
       state.error = null;
-      localStorage.removeItem('authToken');
-      localStorage.removeItem('user');
+      localStorage.removeItem("authToken");
+      localStorage.removeItem("user");
     },
     clearError: (state) => {
       state.error = null;
