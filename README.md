@@ -4,6 +4,14 @@ A complete, production-ready React.js frontend for a Pet Adoption Management Sys
 
 ## Features
 
+Below are the default credentials for testing:
+Admin Login
+**Email**: admin123@gmail.com
+**Password**: admin123
+Test User you can create 
+Deployed Link (if any): https://pet-adoption-teal.vercel.app
+**Temp data i will push ok**
+
 - **Role-Based Access Control**: Visitor, User, and Admin roles with different UI/features
 - **Authentication**: JWT-based login/register with localStorage token persistence
 - **Pet Management**: Browse, search, filter, and view detailed pet information
