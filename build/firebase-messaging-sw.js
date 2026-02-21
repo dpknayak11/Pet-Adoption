@@ -8,6 +8,7 @@ firebase.initializeApp({
   storageBucket: "pet-adoption-ccbbc.firebasestorage.app",
   messagingSenderId: "218049514296",
   appId: "1:218049514296:web:ed84c0393720c140b48fcd",
+  measurementId: "G-T0WTTYF0SJ"
 });
 
 // ✅ Define messaging properly
@@ -15,14 +16,10 @@ const messaging = firebase.messaging();
 
 // ✅ Background Notification
 messaging.onBackgroundMessage(function (payload) {
-  console.log("Background message:", payload);
-
-  self.registration.showNotification(
-    payload.notification.title,
-    {
-      body: payload.notification.body,
-      icon: "/logo121.jpg",
-      badge: "/logo121.jpg",
-    }
-  );
+  const notificationTitle = payload.notification?.title || " Notification Title! ";
+  const notificationOptions = {
+    body: payload.notification?.body || " Notification Body! ",
+    icon: payload.notification?.image || "/logo121.jpg",
+  };
+  self.registration.showNotification(notificationTitle, notificationOptions);
 });

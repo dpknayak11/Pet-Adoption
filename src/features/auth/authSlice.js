@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { authAPI } from "../../services/api";
-import { requestForToken } from "./../../firebase";
+import { requestForToken } from "../../Notification/firebase";
 
 // Async Thunks
 export const login = createAsyncThunk(
