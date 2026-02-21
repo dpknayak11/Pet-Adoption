@@ -4,7 +4,7 @@ import { petsAPI } from '../../services/api';
 // Async Thunks
 export const fetchPets = createAsyncThunk(
   'pets/fetchPets',
-  async ({ page = 1, search = '', species = '', limit = 12 }, { rejectWithValue }) => {
+  async ({ page = 1, search = '', species = '', limit = 20 }, { rejectWithValue }) => {
     try {
       const response = await petsAPI.getAllPets(page, search, species, limit);
       

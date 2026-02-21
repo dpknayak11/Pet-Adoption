@@ -61,7 +61,7 @@ const Home = () => {
       </div>
 
       {/* Search & Filter */}
-      <div className="row mb-4">
+      <div className="row">
         <div className="col-12">
           <div className="card shadow-lg">
             <div className="card-header">
