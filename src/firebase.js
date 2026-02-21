@@ -27,9 +27,16 @@ export const requestForToken = async () => {
       console.log("Notification permission denied");
       return null;
     }
+
+    const registration = await navigator.serviceWorker.register(
+      "/firebase-messaging-sw.js"
+    );
+
     const token = await getToken(messaging, {
       vapidKey: process.env.REACT_APP_FIREBASE_VAPID_KEY,
+      serviceWorkerRegistration: registration,
     });
+
     console.log("FCM Token:", token);
     return token;
   } catch (error) {
@@ -37,11 +44,9 @@ export const requestForToken = async () => {
     return null;
   }
 };
-
 // 🔔 Foreground Notification Listener
-export const onMessageListener = () =>
-  new Promise((resolve) => {
-    onMessage(messaging, (payload) => {
-      resolve(payload);
-    });
+export const onMessageListener = (callback) => {
+  onMessage(messaging, (payload) => {
+    callback(payload);
   });
+};

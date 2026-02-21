@@ -21,8 +21,8 @@ messaging.onBackgroundMessage(function (payload) {
     payload.notification.title,
     {
       body: payload.notification.body,
-      icon: "/logo121.png",
-      badge: "/logo121.png",
+      icon: "/logo121.jpg",
+      badge: "/logo121.jpg",
     }
   );
 });

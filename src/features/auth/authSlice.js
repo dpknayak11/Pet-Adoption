@@ -12,7 +12,7 @@ export const login = createAsyncThunk(
       const { token, user } = response.data.data;
       localStorage.setItem("authToken", token);
       localStorage.setItem("user", JSON.stringify(user));
-      // 🔹 Generate FCM token
+      //  Generate FCM token
       if (user.role === "USER") {
         const fcmToken = await requestForToken();
         if (fcmToken) await authAPI.updateFcmToken(fcmToken);
@@ -32,6 +32,11 @@ export const register = createAsyncThunk(
       const { token, user } = response.data.data;
       localStorage.setItem("authToken", token);
       localStorage.setItem("user", JSON.stringify(user));
+      //  Generate FCM token
+      if (user.role === "USER") {
+        const fcmToken = await requestForToken();
+        if (fcmToken) await authAPI.updateFcmToken(fcmToken);
+      }
       return { token, user };
     } catch (error) {
       return rejectWithValue(

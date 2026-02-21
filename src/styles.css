@@ -484,10 +484,18 @@ body {
   box-shadow: inset 0 0 0 2px rgba(37, 99, 235, 0.05);
 }
 
+/* .table-responsive {
+  border-radius: 0.5rem;
+  overflow: hidden;
+} */
+
 .table-responsive {
   border-radius: 0.5rem;
   overflow: hidden;
+  overflow-x: auto;   /* 👈 Left to right scroll */
+  -webkit-overflow-scrolling: touch; /* Smooth scroll mobile pe */
 }
+
 
 /* ============================================
    HERO SECTION

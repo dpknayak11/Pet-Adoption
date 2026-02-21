@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -22,23 +22,25 @@ import AdminDashboard from './pages/AdminDashboard';
 import ManagePets from './pages/ManagePets';
 import Applications from './pages/Applications';
 
-import { onMessageListener } from "./firebase";
+import { onMessageListener, requestForToken } from "./firebase";
 import { useEffect } from 'react';
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-useEffect(() => {
-  onMessageListener()
-    .then((payload) => {
-      console.log("Foreground Notification:", payload);
 
-     alert(`${payload.notification.title}\n\n${payload.notification.body}`);
-      // Manual browser notification show
-      new Notification(payload.notification.title, {
-        body: payload.notification.body,
-        icon: "/logo121.png",
-      });
-    })
-    .catch((err) => console.log("Listener Error:", err));
+
+useEffect(() => {
+  requestForToken();
+
+  onMessageListener((payload) => {
+    console.log("Foreground Notification:", payload);
+    toast.info(
+      <>
+        <strong>{payload.notification.title}</strong>
+        <div>{payload.notification.body}</div>
+      </>
+    );
+  });
 }, []);
 
 

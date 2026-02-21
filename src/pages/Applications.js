@@ -27,8 +27,12 @@ const Applications = () => {
     }
   }, [successMessage, dispatch]);
 
-  const handleUpdateStatus = (applicationId, newStatus) => {
-    dispatch(updateApplicationStatus({ applicationId, status: newStatus }));
+  const handleUpdateStatus = async (applicationId, newStatus) => {
+   await dispatch(updateApplicationStatus({ applicationId, status: newStatus }));
+    setTimeout(() => {
+      dispatch(getAllApplications());
+    }, 100);
+
   };
 
   const getStatusBadgeClass = (status) => {
