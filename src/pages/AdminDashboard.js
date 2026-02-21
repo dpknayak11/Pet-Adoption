@@ -28,7 +28,7 @@ const AdminDashboard = () => {
   return (
     <div>
       {/* Hero Section */}
-      <div className="hero-section mb-5">
+      <div className="hero-section">
         <h1><i className="bi bi-gear me-2"></i>Admin Dashboard</h1>
         <p>Manage your pet adoption system and applications</p>
       </div>

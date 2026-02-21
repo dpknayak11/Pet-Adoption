@@ -18,7 +18,7 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg navbar-dark sticky-top">
       <div className="container-fluid">
         <Link className="navbar-brand fw-bold" to="/">
-          <i className="bi bi-paw"></i> Pet Adoption System
+          <i className="bi bi-paw"></i> Pet Adoption{user?.role === 'ADMIN' && ' System'} 
         </Link>
         <button
           className="navbar-toggler"

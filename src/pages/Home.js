@@ -55,7 +55,7 @@ const Home = () => {
   return (
     <div>
       {/* Hero Section */}
-      <div className="hero-section mb-5">
+      <div className="hero-section">
         <h1>Find Your Perfect Companion</h1>
         <p>Discover loving pets waiting for their forever homes</p>
       </div>

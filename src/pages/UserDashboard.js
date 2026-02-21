@@ -43,7 +43,7 @@ const UserDashboard = () => {
   return (
     <div>
       {/* Hero Section */}
-      <div className="hero-section mb-5">
+      <div className="hero-section">
         <h1>Welcome, {user?.name || 'User'}! 👋</h1>
         <p>Track your adoption applications and find your perfect companion</p>
       </div>

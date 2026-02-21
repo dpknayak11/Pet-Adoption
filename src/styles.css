@@ -3,8 +3,8 @@
    ============================================ */
 
 :root {
-  --primary-color: #2563eb;
-  --primary-dark: #1e40af;
+  --primary-color: #213b73;
+  --primary-dark: #081233;
   --secondary-color: #10b981;
   --danger-color: #ef4444;
   --warning-color: #f59e0b;
@@ -40,7 +40,7 @@ body {
    ============================================ */
 
 .navbar {
-  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%) !important;
+  background: linear-gradient(135deg, #213b73 0%, #081233 100%) !important;
   box-shadow: var(--shadow-lg);
   padding: 1rem 0;
   border-bottom: 3px solid #1e40af;
@@ -502,7 +502,7 @@ body {
    ============================================ */
 
 .hero-section {
-  background: linear-gradient(135deg, var(--primary-color) 0%, #1e40af 100%);
+  background: linear-gradient(135deg, var(--primary-color), #213b73 0%, #081233 100%);
   color: white;
   padding: 3rem 2rem;
   border-radius: 0.75rem;

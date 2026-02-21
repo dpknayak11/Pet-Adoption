@@ -25,8 +25,8 @@ const Footer = () => {
     ],
 
     contact: {
-      phone: "(555) 123-4567",
-      email: "info@petadoption.com",
+      phone: "+91 7220096978",
+      email: "dpknayak111@gmail.com",
       address: "123 Pet Lane, City, State",
     },
 
